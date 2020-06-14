@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
 
 const CampusView = (props) => {
   let studentDisplay;
+  console.log(props.campus.students);
   if (props.campus.students) {
     studentDisplay = (
       <div>

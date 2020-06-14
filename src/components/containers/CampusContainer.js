@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchCampusThunk } from "../../thunks";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchCampusThunk } from '../../thunks';
 
-import { CampusView } from "../views";
+import { CampusView } from '../views';
 
 class CampusContainer extends Component {
   // constructor(props) {
@@ -14,6 +14,7 @@ class CampusContainer extends Component {
   }
 
   render() {
+    console.log(this.props.campus);
     return <CampusView campus={this.props.campus} />;
   }
 }
