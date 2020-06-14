@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 // ACTION TYPES
-const FETCH_ALL_STUDENTS = "FETCH_ALL_STUDENTS";
-const ENROLL_STUDENT = "ENROLL_STUDENT";
+const FETCH_ALL_STUDENTS = 'FETCH_ALL_STUDENTS';
+const ENROLL_STUDENT = 'ENROLL_STUDENT';
 
 // ACTION CREATORS
 
@@ -24,7 +24,7 @@ const enrollStudent = (student) => {
 
 export const fetchAllStudentsThunk = () => (dispatch) => {
   return axios
-    .get("/api/students")
+    .get('/api/students')
     .then((res) => res.data)
     .then((students) => dispatch(fetchAllStudents(students)))
     .catch((err) => console.log(err));
