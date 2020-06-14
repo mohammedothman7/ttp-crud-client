@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 
 const CampusView = (props) => {
@@ -16,6 +17,14 @@ const CampusView = (props) => {
     studentDisplay = <p>There are no students enrolled</p>;
   }
 
+=======
+import React from "react";
+import "./styles/CampusView.css";
+import { Link } from "react-router-dom";
+import { StudentNameListContainer } from "../containers";
+
+const CampusView = (props) => {
+>>>>>>> 00d77b94338a4b8dae2bfc5bc180b162f836f7d7
   return (
     <>
       <img src={props.campus.imageUrl} alt={props.campus.name} />
@@ -23,7 +32,15 @@ const CampusView = (props) => {
       <h3>{props.campus.address}</h3>
 
       <p>{props.campus.description}</p>
-      {studentDisplay}
+
+      <StudentNameListContainer students={props.campus.students} />
+
+      <Link className="edit-link" to={`/campuses/${props.campus.id}/edit`}>
+        Edit
+      </Link>
+      <button onClick={() => props.handleDelete(props.campus.id)}>
+        Delete
+      </button>
     </>
   );
 };
