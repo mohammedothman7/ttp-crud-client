@@ -7,3 +7,5 @@ export { default as NavBarContainer } from './NavBarContainer';
 export { default as StudentNameListContainer } from './StudentNameListContainer';
 export { default as AddStudentToCampusContainer } from './AddStudentToCampusContainer';
 export { default as AllStudentsContainer } from './AllStudentsContainer';
+export { default as HomeContainer } from './HomeContainer';
+export { default as StudentContainer } from './StudentContainer';
