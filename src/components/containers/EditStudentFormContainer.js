@@ -14,12 +14,17 @@ class EditStudentFormContainer extends Component {
       email: '',
       gpa: '',
       imageUrl: '',
+      campusId: null,
     };
   }
 
   componentDidMount() {
     this.props.fetchStudent(this.props.match.params.id).then(({ payload }) => {
-      this.setState(payload);
+      console.log(payload);
+      this.setState(
+        payload,
+        console.log('In EditStudentFormContainer', this.state)
+      );
     });
   }
 
