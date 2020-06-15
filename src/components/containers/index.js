@@ -9,3 +9,4 @@ export { default as AddStudentToCampusContainer } from './AddStudentToCampusCont
 export { default as AllStudentsContainer } from './AllStudentsContainer';
 export { default as HomeContainer } from './HomeContainer';
 export { default as StudentContainer } from './StudentContainer';
+export { default as AddStudentFormContainer } from './AddStudentFormContainer';
