@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchAllStudentsThunk } from "../../thunks";
+import React, { Component } from 'react';
+//import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { fetchAllStudentsThunk } from '../../thunks';
 
 class AddStudentToCampusContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { studentId: "" };
+    this.state = { studentId: '' };
   }
   componentDidMount() {
     this.props.fetchAllStudents();
@@ -32,8 +32,8 @@ class AddStudentToCampusContainer extends Component {
         <h3>Hello from AddStudentToCampusContainer</h3>
 
         <form onSubmit={this.handleSubmit}>
-          <select name="studentId" onChange={this.handleChange}>
-            <option value="">Please select a student</option>
+          <select name='studentId' onChange={this.handleChange}>
+            <option value=''>Please select a student</option>
             {this.props.allStudents
               .filter((s) => s.campusId !== this.props.campusId)
               .map((student) => {
@@ -45,7 +45,7 @@ class AddStudentToCampusContainer extends Component {
                 );
               })}
           </select>
-          <button type="submit">Enroll Student</button>
+          <button type='submit'>Enroll Student</button>
         </form>
       </div>
     );
