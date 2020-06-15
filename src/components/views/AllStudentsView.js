@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 function AllStudentsView(props) {
   return (
     <div>
+      <div className='addStudent'>
+        <Link to='/students/new' className='add-campus'>
+          Add Student
+        </Link>
+      </div>
       {props.allStudents.length > 0 ? (
         props.allStudents.map((students) => {
           return (
