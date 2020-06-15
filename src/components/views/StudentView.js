@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AddCampusToStudentContainer } from '../containers';
+import { Button } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function StudentView(props) {
   const { student } = props;
@@ -12,9 +16,35 @@ export default function StudentView(props) {
       <p>
         {student.email} <br></br> GPA: {student.gpa}
       </p>
-      <Link className='edit-link' to={`/students/${props.student.id}/edit`}>
+      {props.student.campusId !== null ? (
+        <p>
+          {' '}
+          <Link to={`/campuses/${props.campusName.id}`}>
+            {props.campusName.name}
+          </Link>
+        </p>
+      ) : (
+        <p>Student is not enrolled in any campuses</p>
+      )}
+      <AddCampusToStudentContainer
+        studentId={props.student.id}
+        handleEnrollStudent={props.handleEnrollStudent}
+        allCampus={props.allCampus}
+      />
+      <Button
+        onClick={() => props.handleEdit(student.id)}
+        color='primary'
+        variant='contained'
+      >
         Edit
-      </Link>
+      </Button>
+      <Button
+        onClick={() => props.handleDelete(student.id)}
+        color='secondary'
+        variant='contained'
+      >
+        Delete
+      </Button>
     </div>
   );
 }
