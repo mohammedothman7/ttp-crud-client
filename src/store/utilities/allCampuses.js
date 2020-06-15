@@ -1,10 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 // ACTION TYPES;
-const FETCH_ALL_CAMPUSES = "FETCH_ALL_CAMPUSES";
-const ADD_CAMPUS = "ADD_CAMPUS";
-const EDIT_CAMPUS = "EDIT_CAMPUS";
-const DELETE_CAMPUS = "DELETE_CAMPUS";
+const FETCH_ALL_CAMPUSES = 'FETCH_ALL_CAMPUSES';
+const ADD_CAMPUS = 'ADD_CAMPUS';
+const EDIT_CAMPUS = 'EDIT_CAMPUS';
+const DELETE_CAMPUS = 'DELETE_CAMPUS';
+const ENROLL_STUDENT_TO_CAMPUS = 'ENROLL_STUDENT_TO_CAMPUS';
 
 // ACTION CREATORS;
 const fetchAllCampuses = (campuses) => {
@@ -35,10 +36,17 @@ const deleteCampus = (id) => {
   };
 };
 
+const enrollStudent = (student) => {
+  return {
+    type: ENROLL_STUDENT_TO_CAMPUS,
+    payload: student,
+  };
+};
+
 // THUNK CREATORS;
 export const fetchAllCampusesThunk = () => (dispatch) => {
   return axios
-    .get("/api/campuses")
+    .get('/api/campuses')
     .then((res) => res.data)
     .then((campuses) => dispatch(fetchAllCampuses(campuses)))
     .catch((err) => console.log(err));
@@ -46,7 +54,7 @@ export const fetchAllCampusesThunk = () => (dispatch) => {
 
 export const addCampusThunk = (campus, ownProps) => (dispatch) => {
   return axios
-    .post("/api/campuses", campus)
+    .post('/api/campuses', campus)
     .then((res) => res.data)
     .then((newCampus) => {
       const tweakedCampus = { ...newCampus, students: [] };
@@ -74,6 +82,15 @@ export const deleteCampusThunk = (id) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const enrollStudentToCampusThunk = (studentId, campus) => (dispatch) => {
+  console.log('allCampuses campusID:', campus);
+  return axios
+    .put(`/api/students/enrollStudent/${studentId}`, campus)
+    .then((res) => res.data)
+    .then((student) => dispatch(enrollStudent(student)))
+    .catch((err) => console.log(err));
+};
+
 // REDUCER;
 const reducer = (state = [], action) => {
   switch (action.type) {
@@ -85,7 +102,10 @@ const reducer = (state = [], action) => {
       return state.map((campus) =>
         campus.id === action.payload.id ? action.payload : campus
       );
-
+    case ENROLL_STUDENT_TO_CAMPUS:
+      return state.map((student) =>
+        student.id === action.payload.id ? action.payload : student
+      );
     case DELETE_CAMPUS:
       console.log(action.payload);
       return state.filter((campus) => campus.id !== action.payload);
