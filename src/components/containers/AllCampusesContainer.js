@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchAllCampusesThunk, deleteCampusThunk } from "../../thunks";
-import { AllCampusesView } from "../views";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchAllCampusesThunk, deleteCampusThunk } from '../../thunks';
+import { AllCampusesView } from '../views';
+import { withRouter } from 'react-router-dom';
 
 // Smart container;
 class AllCampusesContainer extends Component {
@@ -14,12 +15,23 @@ class AllCampusesContainer extends Component {
     this.props.deleteCampus(id);
   };
 
+  handleEdit = (id) => {
+    //console.log('In handleEdit');
+    this.props.history.push(`/campuses/${id}`);
+  };
+
+  handleNew = () => {
+    this.props.history.push(`/students/new`);
+  };
+
   render() {
     return (
       <AllCampusesView
         allCampuses={this.props.allCampuses}
         hello={this.props.hello}
         handleDelete={this.handleDelete}
+        handleEdit={this.handleEdit}
+        handleNew={this.handleNew}
       />
     );
   }
@@ -28,7 +40,7 @@ class AllCampusesContainer extends Component {
 // Map state to props;
 const mapState = (state) => {
   return {
-    hello: "hello world!!!",
+    hello: 'hello world!!!',
     allCampuses: state.allCampuses,
   };
 };
@@ -49,4 +61,4 @@ AllCampusesContainer.propTypes = {
 };
 
 // Export our store-connected container by default;
-export default connect(mapState, mapDispatch)(AllCampusesContainer);
+export default connect(mapState, mapDispatch)(withRouter(AllCampusesContainer));
