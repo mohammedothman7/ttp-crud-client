@@ -9,7 +9,7 @@ export default function StudentView(props) {
         {student.firstName} {student.lastName}
       </h1>
       <p>
-        {student.email} <br></br> {student.gpa}
+        {student.email} <br></br> GPA: {student.gpa}
       </p>
     </div>
   );
