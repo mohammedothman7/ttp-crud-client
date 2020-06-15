@@ -8,3 +8,4 @@ export { default as StudentNameListView } from './StudentNameListView';
 export { default as AllStudentsView } from './AllStudentsView';
 export { default as HomeView } from './HomeView';
 export { default as StudentView } from './StudentView';
+export { default as AddStudentFormView } from './AddStudentFormView';
