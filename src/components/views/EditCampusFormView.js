@@ -1,43 +1,44 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const EditCampusFormView = (props) => {
   return (
     <div>
       <form onSubmit={props.handleSubmit}>
         <div>
-          Name:{" "}
+          Name:{' '}
           <input
             value={props.name}
-            name="name"
+            name='name'
             onChange={props.handleChange}
           ></input>
         </div>
         <div>
-          Address:{" "}
+          Address:{' '}
           <input
             value={props.address}
-            name="address"
+            name='address'
             onChange={props.handleChange}
           ></input>
         </div>
         <div>
-          Description:{" "}
+          Description:{' '}
           <input
             value={props.description}
-            name="description"
+            name='description'
             onChange={props.handleChange}
           ></input>
         </div>
         <div>
-          Image Url:{" "}
+          Image Url:{' '}
           <input
             value={props.imageUrl}
-            name="imageUrl"
+            name='imageUrl'
             onChange={props.handleChange}
           ></input>
         </div>
-        <button>Edit Campus</button>
+        <button type='submit'>Save</button>
+        <button>Cancel</button>
       </form>
     </div>
   );
