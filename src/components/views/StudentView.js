@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function StudentView(props) {
   const { student } = props;
@@ -11,6 +12,9 @@ export default function StudentView(props) {
       <p>
         {student.email} <br></br> GPA: {student.gpa}
       </p>
+      <Link className='edit-link' to={`/students/${props.student.id}/edit`}>
+        Edit
+      </Link>
     </div>
   );
 }
