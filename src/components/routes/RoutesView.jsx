@@ -5,13 +5,17 @@ import {
   CampusContainer,
   AddCampusFormContainer,
   EditCampusFormContainer,
+  AllStudentsContainer,
+  HomeContainer,
+  StudentContainer,
+  AddStudentFormContainer,
+  EditStudentFormContainer,
 } from '../containers';
-import AllStudentsContainer from '../containers/AllStudentsContainer';
 
 const RoutesView = () => {
   return (
     <Switch>
-      <Route exact path='/' component={AllCampusesContainer} />
+      <Route exact path='/' component={HomeContainer} />
       <Route exact path='/campuses' component={AllCampusesContainer} />
       <Route exact path='/campuses/new' component={AddCampusFormContainer} />
       <Route exact path='/campuses/:id' component={CampusContainer} />
@@ -21,6 +25,14 @@ const RoutesView = () => {
         component={EditCampusFormContainer}
       />
       <Route exact path='/students' component={AllStudentsContainer} />
+      <Route exact path='/students/new' component={AddStudentFormContainer} />
+      <Route exact path='/students/:id' component={StudentContainer} />
+      <Route
+        exact
+        path='/students/:id/edit'
+        component={EditStudentFormContainer}
+      />
+
     </Switch>
   );
 };

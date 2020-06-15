@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { fetchCampusThunk, editCampusThunk } from "../../thunks";
-import { connect } from "react-redux";
-import { EditCampusFormView } from "../views";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { fetchCampusThunk, editCampusThunk } from '../../thunks';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { EditCampusFormView } from '../views';
 
 class EditCampusFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      address: "",
-      description: "",
-      imageUrl: "",
+      name: '',
+      address: '',
+      description: '',
+      imageUrl: '',
     };
   }
 
@@ -31,6 +32,12 @@ class EditCampusFormContainer extends Component {
     e.preventDefault();
     const id = this.props.match.params.id;
     this.props.editCampus(id, this.state);
+    this.props.history.push(`/campuses/${id}`);
+  };
+
+  handleCancel = (e) => {
+    e.preventDefault();
+    const id = this.props.match.params.id;
     this.props.history.push(`/campuses/${id}`);
   };
 
@@ -64,4 +71,7 @@ EditCampusFormContainer.propTypes = {
   editCampus: PropTypes.func.isRequired,
 };
 
-export default connect(mapState, mapDispatch)(EditCampusFormContainer);
+export default connect(
+  mapState,
+  mapDispatch
+)(withRouter(EditCampusFormContainer));

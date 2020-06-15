@@ -1,12 +1,11 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchCampusThunk } from '../../thunks';
-=======
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCampusThunk, deleteCampusThunk } from "../../thunks";
->>>>>>> 00d77b94338a4b8dae2bfc5bc180b162f836f7d7
+import {
+  fetchCampusThunk,
+  deleteCampusThunk,
+  enrollStudentThunk,
+} from "../../thunks";
+
 
 import { CampusView } from '../views';
 
@@ -20,15 +19,18 @@ class CampusContainer extends Component {
     this.props.history.push("/campuses");
   };
 
+  handleEnrollStudent = (campusId, studentId) => {
+    this.props.enrollStudent(campusId, studentId);
+  };
+
   render() {
-<<<<<<< HEAD
-    console.log(this.props.campus);
-    return <CampusView campus={this.props.campus} />;
-=======
     return (
-      <CampusView campus={this.props.campus} handleDelete={this.handleDelete} />
+      <CampusView
+        campus={this.props.campus}
+        handleDelete={this.handleDelete}
+        handleEnrollStudent={this.handleEnrollStudent}
+      />
     );
->>>>>>> 00d77b94338a4b8dae2bfc5bc180b162f836f7d7
   }
 }
 
@@ -43,6 +45,8 @@ const mapDispatch = (dispatch) => {
   return {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
     deleteCampus: (id) => dispatch(deleteCampusThunk(id)),
+    enrollStudent: (campusId, studentId) =>
+      dispatch(enrollStudentThunk(campusId, studentId)),
   };
 };
 

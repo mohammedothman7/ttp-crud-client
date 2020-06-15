@@ -1,35 +1,53 @@
 import axios from 'axios';
 
-// ACTION TYPES;
+// ACTION TYPES
 const FETCH_ALL_STUDENTS = 'FETCH_ALL_STUDENTS';
-// const ADD_CAMPUS = "ADD_CAMPUS";
-// const EDIT_CAMPUS = "EDIT_CAMPUS";
+const ENROLL_STUDENT = 'ENROLL_STUDENT';
+const EDIT_STUDENT = 'EDIT_STUDENT';
+const ADD_STUDENT = 'ADD_STUDENT';
+const DELETE_STUDENT = 'DELETE_STUDENT';
 
-// ACTION CREATORS;
-const fetchAllStudents = (allStudents) => {
+// ACTION CREATORS
+
+const fetchAllStudents = (students) => {
   return {
     type: FETCH_ALL_STUDENTS,
-    payload: allStudents,
+    payload: students,
   };
 };
 
-// const addCampus = (campus) => {
-//   return {
-//     type: ADD_CAMPUS,
-//     payload: campus,
-//   };
-// };
+const enrollStudent = (student) => {
+  return {
+    type: ENROLL_STUDENT,
+    payload: student,
+  };
+};
 
-// const editCampus = (campus) => {
-//   return {
-//     type: EDIT_CAMPUS,
-//     payload: campus,
-//   };
-// };
+const addStudent = (student) => {
+  return {
+    type: ADD_STUDENT,
+    payload: student,
+  };
+};
 
-// THUNK CREATORS;
+const editStudent = (student) => {
+  return {
+    type: EDIT_STUDENT,
+    payload: student,
+  };
+};
+
+const deleteStudent = (student) => {
+  return {
+    type: DELETE_STUDENT,
+    payload: student,
+  };
+};
+
+// THUNK CREATORS
+
 export const fetchAllStudentsThunk = () => (dispatch) => {
-  console.log('In Fetch All Students Thunk');
+
   return axios
     .get('/api/students')
     .then((res) => res.data)
@@ -37,34 +55,64 @@ export const fetchAllStudentsThunk = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-// export const addCampusThunk = (campus, ownProps) => (dispatch) => {
-//   return axios
-//     .post("/api/campuses", campus)
-//     .then((res) => res.data)
-//     .then((newCampus) => {
-//       dispatch(addCampus(newCampus));
-//       ownProps.history.push(`/campuses/${newCampus.id}`);
-//     })
-//     .catch((err) => console.log(err));
-// };
+export const enrollStudentThunk = (studentId, student) => (dispatch) => {
+  return axios
+    .put(`/api/students/${studentId}`, { campusId: student.campusId })
+    .then((res) => res.data)
+    .then((student) => dispatch(enrollStudent(student)))
+    .catch((err) => console.log(err));
+};
 
-// export const editCampusThunk = (id, campus) => (dispatch) => {
-//   return axios
-//     .put(`/api/campuses/${id}`, campus)
-//     .then((res) => res.data)
-//     .then((updatedCampus) => dispatch(editCampus(updatedCampus)))
-//     .catch((err) => console.log(err));
-// };
+export const addStudentThunk = (student, ownProps) => (dispatch) => {
+  console.log('In addStudentsThunk');
+  return axios
+    .post('/api/students/', student)
+    .then((res) => console.log(res.data))
+    .then((newStudent) => {
+      // const tweakedStudent = { ...newStudent };
+      dispatch(addStudent(newStudent));
+      ownProps.history.push(`/students/${newStudent.id}`);
+    })
+    .catch((err) => console.log(err));
+};
 
-// REDUCER;
+export const editStudentThunk = (id, student) => (dispatch) => {
+  return axios
+    .put(`/api/students/${id}`, student)
+    .then((res) => res.data)
+    .then((updatedStudent) => {
+      dispatch(editStudent(updatedStudent));
+    })
+    .catch((err) => console.log(err));
+};
+
+export const deleteStudentThunk = (id) => (dispatch) => {
+  return axios
+    .delete(`/api/students/${id}`)
+    .then((res) => res.data)
+    .then(() => dispatch(deleteStudent(id)))
+    .catch((err) => console.log(err));
+};
+
+// REDUCER
+
 const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL_STUDENTS:
       return action.payload;
-    // case ADD_CAMPUS:
-    //   return [...state, action.payload];
-    // case EDIT_CAMPUS:
-    //   return [...state, action.payload];
+    case ENROLL_STUDENT:
+      return state.map((student) =>
+        student.id === action.payload.id ? action.payload : student
+      );
+    case ADD_STUDENT:
+      return [...state, action.payload];
+    case EDIT_STUDENT:
+      return state.map((student) =>
+        student.id === action.payload.id ? action.payload : student
+      );
+    case DELETE_STUDENT:
+      return state.filter((student) => student.id !== action.payload);
+
     default:
       return state;
   }

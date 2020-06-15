@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { AllStudentsView } from '../views';
-import { fetchAllStudentsThunk } from '../../thunks';
+import { fetchAllStudentsThunk, deleteStudentThunk } from '../../thunks';
+
 
 export class AllStudentsContainer extends Component {
   componentDidMount() {
     this.props.fetchAllStudents();
   }
 
+
+  handleDelete = (id) => {
+    this.props.deleteStudent(id);
+  };
+
+  handleNew = () => {
+    this.props.history.push(`/students/new`);
+  };
+
+  handleEdit = (id) => {
+    this.props.history.push(`/students/${id}/edit`);
+  };
+
   render() {
     return (
       <div>
         {console.log('props', this.props.allStudents)}
-        <AllStudentsView allStudents={this.props.allStudents} />
+        <AllStudentsView
+          allStudents={this.props.allStudents}
+          handleDelete={this.handleDelete}
+          handleNew={this.handleNew}
+          handleEdit={this.handleEdit}
+        />
       </div>
     );
   }
@@ -33,6 +53,8 @@ const mapDispatch = (dispatch) => {
   return {
     //  fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    deleteStudent: (id) => dispatch(deleteStudentThunk(id)),
+
   };
 };
 
@@ -43,6 +65,7 @@ AllStudentsContainer.propTypes = {
 };
 
 // Export our store-connected container by default;
-export default connect(mapState, mapDispatch)(AllStudentsContainer);
+export default connect(mapState, mapDispatch)(withRouter(AllStudentsContainer));
+
 
 // Creates Thunks

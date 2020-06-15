@@ -2,45 +2,90 @@ import React from 'react';
 import './styles/AllCampusesView.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Card, Button, CardMedia, CardActions } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+}));
 
 const AllCampusesView = (props) => {
+  const classes = useStyles();
+
   if (!props.allCampuses.length) {
     return <div className='all-campuses'>There are no campuses</div>;
   }
 
   return (
-<<<<<<< HEAD
     <div className='all-campuses'>
-      {console.log(props.allCampuses)}
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id}>
-          <Link to={`/campuses/${campus.id}`}>
-            <h1>{campus.name}</h1>
-          </Link>
-          <img src={campus.imageUrl} width='200px' alt={campus.name} />
-          <p>{campus.students.length} students</p>
-        </div>
-      ))}
-=======
-    <div className="all-campuses">
-      <Link to="/campuses/new" className="add-campus">
-        New Campus
-      </Link>
+      <Button
+        onClick={props.handleNew}
+        variant='contained'
+        color='primary'
+        startIcon={<AddIcon></AddIcon>}
+        style={{ padding: '15px', margin: '15px' }}
+      >
+        Add Student
+      </Button>
+      <br></br>
+
       <div>
         {props.allCampuses.map((campus) => (
           <div key={campus.id}>
-            <Link to={`/campuses/${campus.id}`}>
-              <h1>{campus.name}</h1>
-            </Link>
-            <img src={campus.imageUrl} width="200px" alt={campus.name} />
-            <p>{campus.students.length} students</p>
-            <button onClick={() => props.handleDelete(campus.id)}>
-              Delete
-            </button>
+            <Card className={classes.root} variant='outlined' style={CardStyle}>
+              <CardMedia
+                className={classes.media}
+                image={campus.imageUrl}
+              ></CardMedia>
+
+              <Link to={`/campuses/${campus.id}`}>
+                <h1>{campus.name}</h1>
+              </Link>
+              <p style={{ color: 'white' }}>
+                {campus.students.length} students
+              </p>
+              <CardActions size='small'>
+                <Button
+                  variant='contained'
+                  color='secondary'
+                  startIcon={<DeleteIcon />}
+                  onClick={() => props.handleDelete(campus.id)}
+                >
+                  Delete
+                </Button>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={() => props.handleEdit(campus.id)}
+                  startIcon={<EditIcon />}
+                >
+                  Edit
+                </Button>
+              </CardActions>
+            </Card>
+            <br></br>
           </div>
         ))}
       </div>
->>>>>>> 00d77b94338a4b8dae2bfc5bc180b162f836f7d7
     </div>
   );
 };
@@ -49,4 +94,7 @@ AllCampusesView.propTypes = {
   allCampuses: PropTypes.array.isRequired,
 };
 
+const CardStyle = {
+  backgroundColor: '#303030',
+};
 export default AllCampusesView;
