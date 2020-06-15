@@ -10,3 +10,5 @@ export { default as HomeView } from './HomeView';
 export { default as StudentView } from './StudentView';
 export { default as AddStudentFormView } from './AddStudentFormView';
 export { default as EditStudentFormView } from './EditStudentFormView';
+export { default as AllStudentsView } from './AllStudentsView';
+

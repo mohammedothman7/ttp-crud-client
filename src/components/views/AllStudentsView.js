@@ -94,4 +94,5 @@ const CardStyle = {
   backgroundColor: '#303030',
 };
 
+
 export default AllStudentsView;

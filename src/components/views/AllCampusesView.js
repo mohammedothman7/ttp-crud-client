@@ -47,6 +47,7 @@ const AllCampusesView = (props) => {
         Add Student
       </Button>
       <br></br>
+
       <div>
         {props.allCampuses.map((campus) => (
           <div key={campus.id}>

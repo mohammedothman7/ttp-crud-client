@@ -5,10 +5,12 @@ import { withRouter } from 'react-router-dom';
 import { AllStudentsView } from '../views';
 import { fetchAllStudentsThunk, deleteStudentThunk } from '../../thunks';
 
+
 export class AllStudentsContainer extends Component {
   componentDidMount() {
     this.props.fetchAllStudents();
   }
+
 
   handleDelete = (id) => {
     this.props.deleteStudent(id);
@@ -52,6 +54,7 @@ const mapDispatch = (dispatch) => {
     //  fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
     deleteStudent: (id) => dispatch(deleteStudentThunk(id)),
+
   };
 };
 
@@ -63,5 +66,6 @@ AllStudentsContainer.propTypes = {
 
 // Export our store-connected container by default;
 export default connect(mapState, mapDispatch)(withRouter(AllStudentsContainer));
+
 
 // Creates Thunks

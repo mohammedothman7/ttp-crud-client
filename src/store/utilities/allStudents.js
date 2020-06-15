@@ -47,6 +47,7 @@ const deleteStudent = (student) => {
 // THUNK CREATORS
 
 export const fetchAllStudentsThunk = () => (dispatch) => {
+
   return axios
     .get('/api/students')
     .then((res) => res.data)
@@ -94,6 +95,7 @@ export const deleteStudentThunk = (id) => (dispatch) => {
 };
 
 // REDUCER
+
 const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL_STUDENTS:
@@ -110,6 +112,7 @@ const reducer = (state = [], action) => {
       );
     case DELETE_STUDENT:
       return state.filter((student) => student.id !== action.payload);
+
     default:
       return state;
   }

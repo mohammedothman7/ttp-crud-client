@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+import React from 'react';
+
+const CampusView = (props) => {
+  let studentDisplay;
+  console.log(props.campus.students);
+  if (props.campus.students) {
+    studentDisplay = (
+      <div>
+        <p>{props.campus.students.length} Students</p>
+        {props.campus.students.map((student) => (
+          <div key={student.id}>{student.firstName}</div>
+        ))}
+      </div>
+    );
+  } else {
+    studentDisplay = <p>There are no students enrolled</p>;
+  }
+
+=======
 import React from "react";
 import "./styles/CampusView.css";
 import { Link } from "react-router-dom";
@@ -7,6 +27,7 @@ import {
 } from "../containers";
 
 const CampusView = (props) => {
+>>>>>>> 00d77b94338a4b8dae2bfc5bc180b162f836f7d7
   return (
     <>
       <img src={props.campus.imageUrl} alt={props.campus.name} />

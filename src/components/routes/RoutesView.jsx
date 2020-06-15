@@ -32,6 +32,7 @@ const RoutesView = () => {
         path='/students/:id/edit'
         component={EditStudentFormContainer}
       />
+
     </Switch>
   );
 };
